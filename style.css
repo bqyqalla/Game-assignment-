@@ -1,0 +1,28 @@
+
+
+.tile {
+    width: 36px;
+    height: 36px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.tile-wall {
+    background-image: url("media/wall.gif")
+}
+
+.tile-space {
+    background-image:  url("media/space.gif")}
+
+.tile-goal {
+    background-image: url("media/goal.gif")
+}
+
+.entity-player {
+    background-image: url("media/player.gif")
+}
+
+.entity-block {
+    background-image: url("media/box.gif")
+}
+
