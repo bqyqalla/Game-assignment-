@@ -47,36 +47,65 @@ function handleKeyPress(event) {
   
   switch (event.key) {
     case "ArrowUp":
-    movePlayer(0, -1); 
+    movePlayer(0, -1,0,-2); 
     break;
     case "ArrowDown":
-    movePlayer(0, 1);
+    movePlayer(0, 1,0 ,2); 
     break;
     case "ArrowLeft":
-    movePlayer(-1,0);
+    movePlayer(-1,0,-2,0); 
     break;
     case "ArrowRight":
-    movePlayer(1,0);
+    movePlayer(1,0,2,0);
     break;
   }
 }
 
 
-function movePlayer(dx, dy) {
+function movePlayer(dx, dy,bx,by) {
   var newPlayerX = playerPosition.x + dx;
   var newPlayerY = playerPosition.y + dy;
 
   console.log(newPlayerX, newPlayerY);
    // Stanna på bannan
-  
+  var obsticaleX = playerPosition.x + bx;
+  var obsticaleY = playerPosition.y + by;
 
 let newPlayerPosition = document.getElementById(`x:${newPlayerX},y:${newPlayerY}`)
-if (newPlayerPosition.classList[1]=="tile-wall") return;
-console.log(playerPosition);
+
+let newboxPosition = document.getElementById(`x:${obsticaleX},y:${obsticaleY}`) 
+console.log(newboxPosition);
 
 let oldPlayerPosition = document.getElementById(`x:${playerPosition.x},y:${playerPosition.y}`);
-oldPlayerPosition.classList.add(newPlayerPosition.classList[1]);
-oldPlayerPosition.classList.remove('entity-player');
+
+if (newPlayerPosition.classList.contains("tile-wall")) return;
+if (newPlayerPosition.classList.contains("tile-goal")) ;{
+  //oldPlayerPosition.classList.("tile-goal");
+}
+
+if (newPlayerPosition.classList.contains("entity-block")) {
+//moving block
+if(newboxPosition.classList.contains("entity-block"))return;
+if(newboxPosition.classList.contains("tile-wall")) return;
+  
+newPlayerPosition.classList.add("entity-player");
+newboxPosition.classList.add("entity-block"); 
+newPlayerPosition.classList.remove('entity-block');
+newboxPosition.classList.remove("tile-space");
+}
+else{
+
+  oldPlayerPosition.classList.add(newPlayerPosition.classList[1]);
+  
+  newPlayerPosition.classList.add('entity-player');
+}
+console.log(playerPosition);
+
+  oldPlayerPosition.classList.remove('entity-player');
+
+
+
+const boxPosition = newPlayerPosition.classList.contains("entity-block");
 
 
 
@@ -84,7 +113,7 @@ oldPlayerPosition.classList.remove('entity-player');
 
 
 
-newPlayerPosition.classList.add('entity-player');
+
 console.log(newPlayerPosition);
 playerPosition.x = newPlayerX
 playerPosition.y = newPlayerY
