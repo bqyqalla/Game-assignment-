@@ -9,16 +9,28 @@ const classes = {
 
 let playerPosition ={}
 
+let totalGoalTiles = 6;
+let reachedGoalTiles = 0;
+
 function createMapLayout(){
   var gameContet= document.getElementById("game");
   for (var y = 0; y < tileMap01.height; y++) {
     for (var x = 0; x < tileMap01.width; x++) {
+      
+     if (tileMap01.mapGrid [y][x][0] === "G"){
+            totalGoalTiles++;
+
+          }
       var tile = document.createElement("div");
       //tile.classname = "tile" + getStyleClass(tileMap01.mapGrid[row][col]);
-      tile.setAttribute("class","tile " + classes[tileMap01.mapGrid[y][x]]);
+      tile.setAttribute("class","tile " + classes[tileMap01.mapGrid[y][x][0]]);
       tile.setAttribute("id", `x:${x},y:${y}`);
       gameContet.appendChild(tile);
-    }
+
+        }
+      
+
+    
   }
   const playerId = document.getElementsByClassName("entity-player")[0].id;
   playerPosition.x = parseInt(playerId. split(",")[0].split(":")[1]);
@@ -77,10 +89,18 @@ let newboxPosition = document.getElementById(`x:${obsticaleX},y:${obsticaleY}`)
 console.log(newboxPosition);
 
 let oldPlayerPosition = document.getElementById(`x:${playerPosition.x},y:${playerPosition.y}`);
+let oldboxPosition = document.getElementById(`x:${obsticaleX.x},y:${obsticaleX.y}`);
 
 if (newPlayerPosition.classList.contains("tile-wall")) return;
-if (newPlayerPosition.classList.contains("tile-goal")) ;{
-  //oldPlayerPosition.classList.("tile-goal");
+if (newboxPosition.classList.contains("tile-goal")) ;{ // goal position
+  
+  oldboxPosition.classList.remove("entity.block");
+   
+  newPlayerPosition.classList.add("tile-goal-reached");
+  reachedGoalTiles = titleMap01.mapGrid[y][x].lenght;
+  if(reachedGoalTiles ===  totalGoalTiles) {
+    alert(" Winner! Winner! Chicken dinner!") // winner Winner 
+  }
 }
 
 if (newPlayerPosition.classList.contains("entity-block")) {
