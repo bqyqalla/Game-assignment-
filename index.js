@@ -118,18 +118,19 @@ newPlayerPosition.classList.add("entity-player");
 newboxPosition.classList.add("entity-block"); 
 newPlayerPosition.classList.remove('entity-block');
 newboxPosition.classList.remove("tile-space");
-if(newboxPositionclassList.contains("tile-goal")){
+if(newboxPosition.classList.contains("tile-goal")){
   
   if(Victory()){
     alert(" Winner! Winner! Chicken Dinner!") // winner alert message
  }
-
 }
+}
+
 else{
 //oldPlayerPosition.classList.add(newPlayerPosition.classList[1]);
   
   newPlayerPosition.classList.add('entity-player');
-}
+ }
 console.log(playerPosition);
 
   oldPlayerPosition.classList.remove('entity-player');
@@ -138,19 +139,9 @@ console.log(playerPosition);
 
 //const boxPosition = newPlayerPosition.classList.contains("entity-block");
 
-function Victory () {
-  const goalTiles = document.querySelectorAll("tile-Goal");
-  for (const tile of goalTiles) {
-      if (!tile.classList.contains("entity-block")) {
-          return false;
-      }
-      
-  }
-  return true;
-}
 
   
-}
+
 
   
 
@@ -185,4 +176,14 @@ playerPosition.y = newPlayerY
 
       //}
 //}
+}
+
+function Victory () {
+  const goalTiles = document.querySelectorAll(".tile-goal");
+  for (const tile of goalTiles) {
+      if (!tile.classList.contains("entity-block")) {
+          return false;
+      }
+  }
+  return true;
 }
